@@ -1,10 +1,13 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:smash_x_app/dialogs/custom_datepicker_dialog.dart';
 import 'package:smash_x_app/ui/auth/sign%20up/signup_controller.dart';
 import 'package:smash_x_app/ui/auth/sign%20up/widgets/custom_button.dart';
 import 'package:smash_x_app/ui/auth/sign%20up/widgets/custom_signup_textfield.dart';
 import 'package:smash_x_app/ui/auth/sign%20up/widgets/customsgnup_widget.dart';
-import 'package:smash_x_app/dialogs/gender_signup_dialog.dart';
+import 'package:smash_x_app/dialogs/gender_dialog.dart';
 
 class SignupView extends StatelessWidget {
   const SignupView({super.key});
@@ -40,11 +43,23 @@ class SignupView extends StatelessWidget {
                     controller: TextEditingController(),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      final selectedDate = await showDialog<DateTime>(
+                        context: context,
+                        builder: (context) => CustomDatePickerDialog(),
+                      );
+
+                      if (selectedDate != null) {
+                        controller.dateController.text =
+                            DateFormat('dd/MM/yyyy').format(selectedDate);
+                      }
+                    },
                     child: SignupTextfield(
                       label: 'Date of birth',
                       controller: controller.dateController,
-                      description: '14/01/2025',
+                      description: controller.dateController.text.isEmpty
+                          ? DateFormat('dd/MM/yyyy').format(DateTime.now())
+                          : controller.dateController.text,
                       menuIcon: Icons.menu,
                       enabled: false,
                     ),
@@ -65,7 +80,22 @@ class SignupView extends StatelessWidget {
                   SignupTextfield(
                     label: 'Mobile Phone',
                     controller: TextEditingController(),
-                    onButtonPressed: () {},
+                    onButtonPressed: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: true,
+                        countryListTheme: const CountryListThemeData(
+                            flagSize: 16,
+                            textStyle: TextStyle(fontSize: 12),
+                            bottomSheetHeight: 500,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12))),
+                        onSelect: (Country country) {
+                          print('${country.name} (+${country.phoneCode})');
+                        },
+                      );
+                    },
                   ),
                   CustomSignupTextfield(
                     label: 'Email',

@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.backgroundColor = Colors.white,
-    this.textColor = Colors.black,
+    this.textColor = const Color.fromARGB(255, 59, 57, 57),
     this.borderRadius = 30.0,
     this.width = double.infinity, // Default to full width
   }) : super(key: key);
@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),

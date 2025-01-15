@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smash_x_app/dialogs/recover_dialog.dart';
 import 'package:smash_x_app/ui/home/home_view.dart';
 import 'package:smash_x_app/ui/auth/login/login_controller.dart';
 import 'package:smash_x_app/widgets/custom_button.dart';
@@ -17,7 +18,9 @@ class LoginView extends StatelessWidget {
     LoginController controller = Get.put(LoginController());
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.black,
         leading: IconButton(
           onPressed: () {
             print("Info icon tapped");
@@ -68,18 +71,34 @@ class LoginView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        print("Remember password tapped");
-                      },
-                      child: Text(
-                        "✓ Remember password",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            controller.toggleVisibility();
+                          },
+                          child: Obx(() {
+                            return Icon(
+                              Icons.done,
+                              size: 17.0,
+                              color: controller.isVisible.value
+                                  ? Colors.white
+                                  : Colors.transparent,
+                            );
+                          }),
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "Remember password",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
-                        print("Recover password tapped");
+                        showRecoverPasswordDialog(context);
                       },
                       child: Text(
                         "Recover password",

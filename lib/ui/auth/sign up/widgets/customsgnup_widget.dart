@@ -8,6 +8,7 @@ class SignupTextfield extends StatelessWidget {
   final IconData? menuIcon;
   final VoidCallback? onButtonPressed;
   final bool enabled;
+  final Color cursorColor; // Add cursorColor as a parameter
 
   const SignupTextfield({
     Key? key,
@@ -18,6 +19,7 @@ class SignupTextfield extends StatelessWidget {
     this.menuIcon,
     this.onButtonPressed,
     this.enabled = true,
+    this.cursorColor = Colors.grey, // Default to gray if not provided
   }) : super(key: key);
 
   @override
@@ -76,6 +78,7 @@ class SignupTextfield extends StatelessWidget {
             Expanded(
               child: TextField(
                 controller: controller,
+                cursorColor: cursorColor, // Set cursor color here
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   isDense: true,

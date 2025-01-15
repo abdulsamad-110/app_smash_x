@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 class SignupController extends GetxController {
  
-  //TextEditingController dateController = TextEditingController();
 
    final dateController = TextEditingController();
    DateTime? selectedDate;
@@ -35,4 +34,20 @@ class SignupController extends GetxController {
   void resetGender() {
     selectedGender.value = '';
   }
+
+  // void showPicker() {
+  //   showCountryPicker(context: context,
+  //   );
+  // }
+//   void showPicker(BuildContext context) {
+//   showCountryPicker(
+//     context: context,
+//     showPhoneCode: true, // Set to true to show the phone code as well
+//     onSelect: (Country country) {
+//       print('Selected country: ${country.name}');
+//       // You can set the country code or name to your controller or text field here
+//     },
+//   );
+// }
+
 }

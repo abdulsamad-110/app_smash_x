@@ -38,6 +38,10 @@ dependencies:
   get: ^4.6.6
   google_fonts:
   lottie:
+  
+  intl: ^0.20.1
+  country_picker:
+  
 
 dev_dependencies:
   flutter_test:

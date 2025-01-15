@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class CustomSignupTextfield extends StatelessWidget {
@@ -6,6 +8,7 @@ class CustomSignupTextfield extends StatelessWidget {
   final bool isRequired;
   final String? description;
   final IconData? menuIcon;
+  final Color? cursorColor; // Declare cursorColor as Color type
 
   const CustomSignupTextfield({
     Key? key,
@@ -14,6 +17,7 @@ class CustomSignupTextfield extends StatelessWidget {
     this.isRequired = true,
     this.description,
     this.menuIcon,
+    this.cursorColor, // Make sure cursorColor is a Color type
   }) : super(key: key);
 
   @override
@@ -65,6 +69,8 @@ class CustomSignupTextfield extends StatelessWidget {
                 height: 30,
                 child: TextField(
                   controller: controller,
+                  cursorColor:
+                      cursorColor ?? Colors.grey, 
                   decoration: InputDecoration(
                     labelText: null,
                     border: InputBorder.none,

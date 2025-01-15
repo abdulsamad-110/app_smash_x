@@ -23,6 +23,12 @@ class LoginController extends GetxController {
     }
     return error;
   }
+  var isVisible = true.obs; // Observable to track visibility
+
+  // Function to toggle the visibility
+  void toggleVisibility() {
+    isVisible.value = !isVisible.value;
+  }
 
   @override
   void onInit() {
