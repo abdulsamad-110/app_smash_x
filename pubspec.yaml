@@ -41,6 +41,7 @@ dependencies:
   
   intl: ^0.20.1
   country_picker:
+  smooth_page_indicator:
   
 
 dev_dependencies:

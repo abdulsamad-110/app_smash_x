@@ -113,7 +113,7 @@ class LoginView extends StatelessWidget {
               CustomButton(
                 text: "LOGIN",
                 onPressed: () {
-                  Get.to(() => const HomeView());
+                  Get.to(() =>  HomeView());
                   print("Login button pressed");
                 },
               ),

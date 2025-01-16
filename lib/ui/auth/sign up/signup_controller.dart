@@ -1,13 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
- 
+  final dateController = TextEditingController();
+  final phoneController = TextEditingController();
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+  final genderController = TextEditingController();
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
 
-   final dateController = TextEditingController();
-   DateTime? selectedDate;
-  
+  DateTime? selectedDate;
+
   // Method to pick a date
   void pickDate(BuildContext context) async {
     DateTime initialDate = DateTime.now();
@@ -19,13 +23,13 @@ class SignupController extends GetxController {
     );
     if (selectedDate != null) {
       selectedDate = selectedDate;
-      dateController.text = '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}';
+      dateController.text =
+          '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}';
     }
   }
-    
+
   RxString selectedGender = ''.obs;
 
-  
   void selectGender(String gender) {
     selectedGender.value = gender;
   }
@@ -49,5 +53,4 @@ class SignupController extends GetxController {
 //     },
 //   );
 // }
-
 }

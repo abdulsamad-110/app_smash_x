@@ -4,32 +4,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xFF121212),
+      backgroundColor: const Color(0xFF121212),
+      leading: IconButton(
+        
+        icon: const Icon(Icons.menu, color: Colors.white), 
+        onPressed: () {
+          Scaffold.of(context).openDrawer(); 
+        },
+      ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              // IconButton(
-              //   icon: Icon(Icons.menu, color: Colors.white),
-              //   onPressed: () {
-              //     Scaffold.of(context).openDrawer();
-              //   },
-              // ),
-              Image.asset(
-                'assets/logo.png',
-                height: 30,
-                width: 30,
-                color: Colors.white,
-              ),
-              // IconButton(
-              //   icon: Icon(Icons.event, color: Colors.white),
-              //   onPressed: () {},
-              // ),
-            ],
+          Image.asset(
+            'assets/logo.png',
+            height: 30,
+            width: 30,
+            color: Colors.white,
           ),
           IconButton(
-            icon: Icon(Icons.event, color: Colors.white),
+            icon: const Icon(Icons.event, color: Colors.white),
             onPressed: () {},
           ),
         ],
@@ -38,5 +31,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

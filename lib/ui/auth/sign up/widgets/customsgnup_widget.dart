@@ -124,7 +124,7 @@ class SignupTextfield extends StatelessWidget {
               Icon(Icons.add, size: 12, color: Colors.black),
               SizedBox(width: 4), // Space between icon and text
               Text(
-                '+1',
+                '',
                 style: TextStyle(
                     fontSize: 10,
                     color: Colors.black,

@@ -15,6 +15,8 @@ class SignupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SignupController controller = Get.put(SignupController());
+    String countryCode = '';
+    String phoneCode = '';
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -91,8 +93,11 @@ class SignupView extends StatelessWidget {
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(12),
                                 topRight: Radius.circular(12))),
-                        onSelect: (Country country) {
-                          print('${country.name} (+${country.phoneCode})');
+                        onSelect: (Country value) {
+                          print(value.countryCode.toString());
+                          print(value.phoneCode.toString());
+                          countryCode = value.countryCode;
+                          phoneCode = value.phoneCode;
                         },
                       );
                     },

@@ -5,47 +5,32 @@ void showRecoverPasswordDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        backgroundColor: Colors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
               padding: const EdgeInsets.all(16),
-              child: Column(
+              child: const Column(
                 children: [
                   Icon(
                     Icons.lock_reset,
                     size: 40,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     "Recover password",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ],
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
@@ -61,7 +46,7 @@ void showRecoverPasswordDialog(BuildContext context) {
                   ),
                   const SizedBox(height: 16),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                         onPressed: () {
@@ -69,14 +54,14 @@ void showRecoverPasswordDialog(BuildContext context) {
                         },
                         child: const Text(
                           "CANCEL",
-                          style: TextStyle(color: Colors.teal),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                       TextButton(
                         onPressed: () {},
                         child: const Text(
                           "SEND",
-                          style: TextStyle(color: Colors.teal),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ],
