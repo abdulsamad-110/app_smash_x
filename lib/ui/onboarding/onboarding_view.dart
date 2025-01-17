@@ -37,7 +37,7 @@ class OnboardingView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Image.asset(
-                          'assets/img${index + 1}.png', // Add your image paths here
+                          'assets/img${index + 1}.png', 
                           fit: BoxFit.cover,
                           height: double.infinity,
                           width: double.infinity,
@@ -52,7 +52,7 @@ class OnboardingView extends StatelessWidget {
           ///// Use Obx to the names list
           Positioned(
             top: 130,
-            left: 130,
+            left: 125,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Obx(

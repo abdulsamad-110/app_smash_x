@@ -13,7 +13,7 @@ class CardSlider extends StatelessWidget {
           Color cardColor;
           switch (index) {
             case 0:
-              cardColor = Colors.black;
+              cardColor = Colors.amber;
               break;
             case 1:
               cardColor = Colors.blue;
@@ -45,15 +45,20 @@ class CardSlider extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.only(
+                        top: 3, bottom: 7, left: 1, right: 1),
                     child: Column(
                       children: [
-                        Image.asset(
-                          color: Colors.white,
-                          'assets/logo.png',
+                        Container(
+                          color: Colors.black,
                           height: 70,
-                          width: 200,
-                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          //width: 200,
+                          child: Image.asset(
+                            'assets/logo.png',
+                            color: Colors.white,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Text(

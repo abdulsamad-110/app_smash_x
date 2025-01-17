@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OnboardingController extends GetxController {
-  final PageController pageController = PageController();
+  final pageController = PageController();
 
-  
-  
-  RxString selectedName='Rubas Hussain'.obs;
-  List<String> names = ['Rubas Hussain', 'Shahzaib Khan', 'Billal Ahmed', 'Abdul Samad'];
+  RxString selectedName = 'Rubas Hussain'.obs;
+  List<String> names = [
+    'Rubas Hussain',
+    'Shahzaib Khan',
+    'Billal Ahmed',
+    'Abdul Samad'
+  ];
 
   @override
   void onInit() {

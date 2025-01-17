@@ -15,7 +15,7 @@ class AddressContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // Trigger the tap action
+      onTap: onTap, 
       child: Container(
         height: 70,
         width: double.infinity,

@@ -98,7 +98,7 @@ class LoginView extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showRecoverPasswordDialog(context);
+                        myRecoverDialog();
                       },
                       child: Text(
                         "Recover password",
@@ -113,7 +113,7 @@ class LoginView extends StatelessWidget {
               CustomButton(
                 text: "LOGIN",
                 onPressed: () {
-                  Get.to(() =>  HomeView());
+                  Get.to(() => HomeView());
                   print("Login button pressed");
                 },
               ),

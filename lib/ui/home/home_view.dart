@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smash_x_app/ui/home/home_controller.dart';
+import 'package:smash_x_app/ui/home/widgets/activites_widget.dart';
 import 'package:smash_x_app/ui/home/widgets/card_slider.dart';
 import 'package:smash_x_app/ui/home/widgets/address_container.dart';
-import 'package:smash_x_app/ui/home/widgets/custom_appbar.dart';
+import 'package:smash_x_app/widgets/custom_appbar.dart';
+import 'package:smash_x_app/ui/home/widgets/matchplay_widget.dart';
 import 'package:smash_x_app/ui/home/widgets/sidenav_drawer.dart';
 import 'package:smash_x_app/ui/onboarding/onboarding_view.dart';
 import 'package:smash_x_app/widgets/custom_bottomnav.dart';
@@ -59,6 +61,11 @@ class HomeView extends StatelessWidget {
                     addressText: 'Activites',
                     onTap: () {
                       print('Activities tapped');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ActivitiesView()),
+                      );
                     },
                   ),
                   const SizedBox(
@@ -70,6 +77,11 @@ class HomeView extends StatelessWidget {
                     addressText: 'MatchPlay! System',
                     onTap: () {
                       print('MatchPlay! System tapped');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MatchPlayView()),
+                      );
                     },
                   ),
                 ],
