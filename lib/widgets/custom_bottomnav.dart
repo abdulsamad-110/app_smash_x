@@ -77,7 +77,7 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('')),
+      appBar: AppBar(title: Text('Custom Bottom Navbar')),
       body: widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: CustomBottomNavbar(
         selectedIndex: selectedIndex,

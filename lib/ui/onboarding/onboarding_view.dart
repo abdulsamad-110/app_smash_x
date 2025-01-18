@@ -23,7 +23,7 @@ class OnboardingView extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  // Handle tap here
+                  
                   print("Tapped on Page $index");
                 },
                 child: Container(

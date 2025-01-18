@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smash_x_app/ui/activities/activities_view.dart';
 import 'package:smash_x_app/ui/home/home_controller.dart';
-import 'package:smash_x_app/ui/home/widgets/activites_widget.dart';
 import 'package:smash_x_app/ui/home/widgets/card_slider.dart';
 import 'package:smash_x_app/ui/home/widgets/address_container.dart';
 import 'package:smash_x_app/widgets/custom_appbar.dart';
@@ -11,8 +9,8 @@ import 'package:smash_x_app/ui/home/widgets/matchplay_widget.dart';
 import 'package:smash_x_app/ui/home/widgets/sidenav_drawer.dart';
 import 'package:smash_x_app/ui/onboarding/onboarding_view.dart';
 import 'package:smash_x_app/widgets/custom_bottomnav.dart';
-import 'package:smash_x_app/widgets/onboarding_widget.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'widgets/newes_widget.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
@@ -23,42 +21,28 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      ///// CustomAppBar
-      appBar: CustomAppBar(),
-      ///// SidenavDrawer
+      ///// Custom AppBar
+      appBar: const CustomAppBar(),
+      ///// Side Navigation Drawer
       drawer: SidenavDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /////onboarding
+            ///// Onboarding
             OnboardingView(),
 
-            const Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  "Centers",
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-              ),
-            ),
-
-            ///// CardSlider
+            //// Card Slider
             const CardSlider(),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  ///// AddressContainer
+                  ///// Address Container for Activities
                   AddressContainer(
                     icon: Icons.favorite_outline_outlined,
-                    addressText: 'Activites',
+                    addressText: 'Activities',
                     onTap: () {
                       print('Activities tapped');
                       Navigator.push(
@@ -68,10 +52,8 @@ class HomeView extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ///// AddressContainer
+                  const SizedBox(height: 20),
+                  ///// Address Container for MatchPlay
                   AddressContainer(
                     icon: Icons.play_circle_outline,
                     addressText: 'MatchPlay! System',
@@ -87,13 +69,13 @@ class HomeView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
+            ///// Newes widget
+            NewesWidget()
           ],
         ),
       ),
-      ///// CustomBottomNavbar
+      ///// Custom Bottom Navigation Bar
       bottomNavigationBar: Obx(
         () => CustomBottomNavbar(
           selectedIndex: controller.selectedIndex.value,
