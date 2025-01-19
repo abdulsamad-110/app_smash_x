@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class SignupController extends GetxController {
   final dateController = TextEditingController();
@@ -11,6 +12,8 @@ class SignupController extends GetxController {
   final passController = TextEditingController();
 
   DateTime? selectedDate;
+  String countryCode = '';
+  String phoneCode = '';
 
   // Method to pick a date
   void pickDate(BuildContext context) async {
@@ -28,7 +31,7 @@ class SignupController extends GetxController {
     }
   }
 
-  RxString selectedGender = ''.obs;
+  RxString selectedGender = 'Male'.obs;
 
   void selectGender(String gender) {
     selectedGender.value = gender;
@@ -53,4 +56,10 @@ class SignupController extends GetxController {
 //     },
 //   );
 // }
+  @override
+  void onInit() {
+    super.onInit();
+    // Set the default date to current date in the format dd/MM/yyyy
+    dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
+  }
 }

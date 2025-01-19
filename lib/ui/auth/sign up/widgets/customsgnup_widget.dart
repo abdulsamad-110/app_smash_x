@@ -4,22 +4,22 @@ class SignupTextfield extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final bool isRequired;
-  final String? description;
   final IconData? menuIcon;
   final VoidCallback? onButtonPressed;
   final bool enabled;
-  final Color cursorColor; // Add cursorColor as a parameter
+  final Color cursorColor;
+  final bool showCursor;
 
   const SignupTextfield({
     Key? key,
     required this.label,
     required this.controller,
     this.isRequired = true,
-    this.description,
     this.menuIcon,
     this.onButtonPressed,
     this.enabled = true,
-    this.cursorColor = Colors.grey, // Default to gray if not provided
+    this.cursorColor = Colors.grey,
+    this.showCursor = true,
   }) : super(key: key);
 
   @override
@@ -36,9 +36,7 @@ class SignupTextfield extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildLabelRow(),
-            if (description != null ||
-                onButtonPressed != null ||
-                menuIcon != null)
+            if (onButtonPressed != null || menuIcon != null)
               _buildDescriptionRow(),
           ],
         ),
@@ -53,7 +51,9 @@ class SignupTextfield extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-              fontSize: 12, color: Color.fromARGB(255, 106, 102, 102)),
+            fontSize: 12,
+            color: Color.fromARGB(255, 106, 102, 102),
+          ),
         ),
         if (isRequired)
           const Icon(
@@ -69,16 +69,16 @@ class SignupTextfield extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 12.0), // Add padding for left and right indent
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Row(
           children: [
-            _buildLeftSideContent(),
+            if (onButtonPressed != null) _buildButton(),
             const SizedBox(width: 8),
             Expanded(
               child: TextField(
                 controller: controller,
-                cursorColor: cursorColor, // Set cursor color here
+                cursorColor: cursorColor,
+                showCursor: showCursor,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   isDense: true,
@@ -100,42 +100,32 @@ class SignupTextfield extends StatelessWidget {
     );
   }
 
-  Widget _buildLeftSideContent() {
-    if (description != null) {
-      return Text(
-        description!,
-        style: const TextStyle(
-            fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
-      );
-    } else if (onButtonPressed != null) {
-      return Container(
-        width: 80,
-        height: 30,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey),
+  Widget _buildButton() {
+    return Container(
+      width: 80,
+      height: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: TextButton(
+        onPressed: onButtonPressed,
+        style: TextButton.styleFrom(padding: EdgeInsets.zero),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.add, size: 12, color: Colors.black),
+            SizedBox(width: 4),
+            Text(
+              '',
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
-        child: TextButton(
-          onPressed: onButtonPressed,
-          style: TextButton.styleFrom(padding: EdgeInsets.zero), // No padding
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.add, size: 12, color: Colors.black),
-              SizedBox(width: 4), // Space between icon and text
-              Text(
-                '',
-                style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return const SizedBox();
-    }
+      ),
+    );
   }
 }

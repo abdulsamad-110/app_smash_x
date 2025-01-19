@@ -15,8 +15,6 @@ class SignupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SignupController controller = Get.put(SignupController());
-    String countryCode = '';
-    String phoneCode = '';
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -59,45 +57,44 @@ class SignupView extends StatelessWidget {
                     child: SignupTextfield(
                       label: 'Date of birth',
                       controller: controller.dateController,
-                      description: controller.dateController.text.isEmpty
-                          ? DateFormat('dd/MM/yyyy').format(DateTime.now())
-                          : controller.dateController.text,
                       menuIcon: Icons.menu,
                       enabled: false,
                     ),
                   ),
                   GestureDetector(
                     onTap: () => showGenderDialog(context),
-                    child: Obx(() => SignupTextfield(
-                          label: 'Gender',
-                          controller: TextEditingController(
-                              text: controller.selectedGender.value),
-                          description: controller.selectedGender.value.isEmpty
-                              ? 'Male'
-                              : controller.selectedGender.value,
-                          menuIcon: Icons.menu,
-                          enabled: false,
-                        )),
+                    child: Obx(
+                      () => SignupTextfield(
+                        label: 'Gender',
+                        controller:  TextEditingController(
+                          text: controller.selectedGender.value,
+                        ),
+                        menuIcon: Icons.menu,
+                        enabled: false,
+                      ),
+                    ),
                   ),
                   SignupTextfield(
                     label: 'Mobile Phone',
-                    controller: TextEditingController(),
+                    controller:  TextEditingController(),
                     onButtonPressed: () {
                       showCountryPicker(
                         context: context,
                         showPhoneCode: true,
                         countryListTheme: const CountryListThemeData(
-                            flagSize: 16,
-                            textStyle: TextStyle(fontSize: 12),
-                            bottomSheetHeight: 500,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(12),
-                                topRight: Radius.circular(12))),
+                          flagSize: 16,
+                          textStyle: TextStyle(fontSize: 12),
+                          bottomSheetHeight: 500,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
+                        ),
                         onSelect: (Country value) {
                           print(value.countryCode.toString());
                           print(value.phoneCode.toString());
-                          countryCode = value.countryCode;
-                          phoneCode = value.phoneCode;
+                          controller.countryCode = value.countryCode;
+                          controller.phoneCode = value.phoneCode;
                         },
                       );
                     },
@@ -122,9 +119,11 @@ class SignupView extends StatelessWidget {
               right: 20,
               bottom: 0,
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Perform your submission logic here
+                },
                 backgroundColor: Colors.black,
-                child: const Icon(
+                child:  const Icon(
                   Icons.done,
                   color: Colors.white,
                 ),

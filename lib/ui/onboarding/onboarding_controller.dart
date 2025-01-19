@@ -7,10 +7,10 @@ class OnboardingController extends GetxController {
 
   RxString selectedName = 'Rubas Hussain'.obs;
   List<String> names = [
-    'Rubas Hussain',
-    'Shahzaib Khan',
-    'Billal Ahmed',
-    'Abdul Samad'
+    'RUBAS HUSSAIN',
+    'SHAHZAIB KHAN',
+    'BILLAL AHMED',
+    'ABDUL SAMAD'
   ];
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smash_x_app/ui/auth/login/login_view.dart';
+import 'package:smash_x_app/ui/auth/splashe/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       //theme: ThemeData.dark(),
-      home: LoginView(),
+      home: SplashView(),
     );
   }
 }

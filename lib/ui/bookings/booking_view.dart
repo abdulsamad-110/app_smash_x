@@ -5,6 +5,15 @@ class BookingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Booking'),
+      ),
+      body: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Text('Welcome Booking View')],
+      ),
+    );
   }
 }

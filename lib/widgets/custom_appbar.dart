@@ -26,7 +26,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
             'assets/logo.png',
@@ -34,18 +33,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 30,
             color: Colors.white,
           ),
-          Row(
-            children: [
-              if (showFilterIcon)
-                IconButton(
-                  icon: const Icon(Icons.filter_list_sharp, color: Colors.white),
-                  onPressed: onFilterPressed,
-                ),
-              IconButton(
-                icon: const Icon(Icons.event, color: Colors.white),
-                onPressed: onEventPressed,
-              ),
-            ],
+          const Spacer(),
+          if (showFilterIcon)
+            IconButton(
+              icon: const Icon(Icons.filter_list_sharp, color: Colors.white),
+              onPressed: onFilterPressed,
+            ),
+          IconButton(
+            icon: const Icon(Icons.event, color: Colors.white),
+            onPressed: onEventPressed,
           ),
         ],
       ),
