@@ -1,37 +1,108 @@
+// import 'package:flutter/material.dart';
+
+// class DayWidget extends StatelessWidget {
+//   final int index;
+
+//   DayWidget(this.index);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 60,
+//       padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 6),
+//       margin: const EdgeInsets.symmetric(vertical: 08),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(8),
+//       ),
+//       child: Column(
+//         children: [
+//           const Text(
+//             'Day',
+//             style: TextStyle(
+//               color: Color.fromARGB(255, 113, 112, 112),
+//               fontSize: 12,
+//             ),
+//           ),
+//           const SizedBox(width: 7),
+//           Text(
+//             '$index',
+//             style: const TextStyle(
+//               color: Colors.black,
+//               fontSize: 14,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:intl/intl.dart';
+import 'package:smash_x_app/dialogs/custom_datepicker_dialog.dart';
+
+import '../activities_controller.dart';
 
 class DayWidget extends StatelessWidget {
   final int index;
+  final bool isSelected;
 
-  DayWidget(this.index);
+  const DayWidget({
+    Key? key,
+    required this.index,
+    required this.isSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ActivitiesController>();
+
+    final currentDate = DateTime.now();
+    final date = currentDate.add(Duration(days: index - 1));
+
     return Container(
       height: 60,
-      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 6),
-      margin: const EdgeInsets.symmetric(vertical: 08),
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 0),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: isSelected ? Colors.black : Colors.white,
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.black, width: 0.3),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Day',
+          Text(
+            //weekday,
+            controller.getWeekday(date),
             style: TextStyle(
-              color: Color.fromARGB(255, 113, 112, 112),
-              fontSize: 12,
+              color: isSelected
+                  ? Colors.white
+                  : const Color.fromARGB(255, 133, 132, 132),
+              fontSize: 10,
             ),
           ),
           const SizedBox(width: 7),
           Text(
-            '$index',
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+            "${date.day}",
+            style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 7),
+          Text(
+            //month,
+            controller.getMonth(date),
+            style: TextStyle(
+                color: isSelected
+                    ? Colors.white
+                    : const Color.fromARGB(255, 133, 132, 132),
+                fontSize: 12,
+                fontWeight: FontWeight.bold),
           ),
         ],
       ),

@@ -39,7 +39,7 @@ dependencies:
   google_fonts:
   lottie:
   
-  intl: ^0.20.1
+  intl:
   country_picker:
   smooth_page_indicator:
   flutter_screenutil: ^5.9.3

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smash_x_app/dialogs/my_dialog.dart';
 import 'package:smash_x_app/widgets/custom_appbar.dart';
+import 'package:smash_x_app/widgets/custom_bottomnav.dart';
 
 import 'activities_controller.dart';
 import 'widgets/daywidget.dart';
@@ -14,24 +15,13 @@ class ActivitiesView extends StatelessWidget {
     final controller = Get.put(ActivitiesController());
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 228, 225, 225),
+      backgroundColor: const Color.fromARGB(255, 232, 230, 230),
       appBar: CustomAppBar(
         showFilterIcon: true,
         onFilterPressed: () {
           myDialog();
         },
       ),
-      // body: ListView.builder(
-      //   scrollDirection: Axis.horizontal,
-      //   itemCount: 32,
-      //   itemBuilder: (context, index) {
-      //     if (index == 0) {
-      //       return UpcomingWidget();
-      //     } else {
-      //       return DayWidget(index);
-      //     }
-      //   },
-      // ),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -39,14 +29,27 @@ class ActivitiesView extends StatelessWidget {
             32,
             (index) {
               return Padding(
-                padding: const EdgeInsets.only(right: 0.0, left: 8.0),
-                child: index == 0 ? UpcomingWidget() : DayWidget(index),
+                padding: const EdgeInsets.only(left: 8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.selectItem(index);
+                  },
+                  child: Obx(() {
+                    final isSelected = controller.selectedIndex.value == index;
+                    return index == 0
+                        ? UpcomingWidget(isSelected: isSelected)
+                        : DayWidget(index: index, isSelected: isSelected);
+                  }),
+                ),
               );
             },
           ),
         ),
       ),
-      // CustomBottom
+      bottomNavigationBar: CustomBottomNavbar(
+        selectedIndex: controller.selectedIndex.value,
+        onTap: (int index) {},
+      ),
     );
   }
 }
