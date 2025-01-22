@@ -27,7 +27,7 @@ class SplashView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: EdgeInsets.only(top: 24),
                       child: Text(
                         'Matchpoint',
                         style: TextStyle(
@@ -39,7 +39,7 @@ class SplashView extends StatelessWidget {
                     Text(
                       'BY MATCHI',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Colors.grey,
                         fontWeight: FontWeight.normal,
                       ),

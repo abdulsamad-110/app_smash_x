@@ -28,10 +28,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           Image.asset(
-            'assets/logo.png',
-            height: 30,
-            width: 30,
-            color: Colors.white,
+            'assets/slogo.png',
+            height: 60,
+            width: 80,
           ),
           const Spacer(),
           if (showFilterIcon)

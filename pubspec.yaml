@@ -42,7 +42,7 @@ dependencies:
   intl: ^0.20.1
   country_picker:
   smooth_page_indicator:
-  
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
             OnboardingView(),
 
             //// Card Slider
-            const CardSlider(),
+            GestureDetector(onTap: () {}, child: const CardSlider()),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -71,7 +71,7 @@ class HomeView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ///// Newes widget
-            NewesWidget()
+            const NewesWidget(),
           ],
         ),
       ),

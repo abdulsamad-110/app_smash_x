@@ -43,6 +43,7 @@ class CardSlider extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
+                  
                   print("Card tapped: PADEL-GULSHAN ${index + 1}");
                 },
                 child: Padding(

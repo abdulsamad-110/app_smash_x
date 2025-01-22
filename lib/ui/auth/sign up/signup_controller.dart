@@ -3,13 +3,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class SignupController extends GetxController {
-  final dateController = TextEditingController();
-  final phoneController = TextEditingController();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
+  final dateController = TextEditingController();
   final genderController = TextEditingController();
+  final phoneController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
+  final repeatPassController = TextEditingController();
 
   DateTime? selectedDate;
   String countryCode = '';
@@ -31,7 +32,7 @@ class SignupController extends GetxController {
     }
   }
 
-  RxString selectedGender = 'Male'.obs;
+  var selectedGender = 'Male'.obs;
 
   void selectGender(String gender) {
     selectedGender.value = gender;
@@ -56,10 +57,48 @@ class SignupController extends GetxController {
 //     },
 //   );
 // }
+
+///// Validation 
+  String? fieldValidation() {
+    String? error;
+
+    if (nameController.text.isEmpty) {
+      error = 'Name is required';
+    } else if (surnameController.text.isEmpty) {
+      error = 'Surname is required';
+    // } else if (dateController.text.isEmpty) {
+    //   error = 'Date of birth is required';
+    // } else if (genderController.text.isEmpty) {
+    //   error = 'Gender is required';
+    // } else if (phoneController.text.isEmpty) {
+    //   error = 'Phone number is required';
+    } else if (emailController.text.isEmpty) {
+      error = 'Email is required';
+    } else if (passController.text.isEmpty) {
+      error = 'Password is required';
+    } else if (repeatPassController.text.isEmpty) {
+      error = 'Repeat password is required';
+    } else if (passController.text != repeatPassController.text) {
+      error = 'Password do not match';
+    }
+
+    return error;
+  }
+  ///// Validation massage
+  void showMessage(String title, String message, Color backgroundColor) {
+    Get.snackbar(
+      title,
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: backgroundColor,
+      colorText: Colors.white,
+    );
+  }
+
   @override
   void onInit() {
     super.onInit();
-    // Set the default date to current date in the format dd/MM/yyyy
+
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
   }
 }

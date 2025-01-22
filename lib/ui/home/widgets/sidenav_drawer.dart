@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../dialogs/logout_dialog.dart';
+
 class SidenavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -10,12 +12,8 @@ class SidenavDrawer extends StatelessWidget {
           color: Color(0xFF121212),
           child: ListView(
             children: [
-              
               createDrawerItem(
-                  icon: Icons.notifications,
-                  text: 'Alerts',
-                  // badge: '0',
-                  context: context),
+                  icon: Icons.notifications, text: 'Alerts', context: context),
               createDrawerItem(
                   icon: Icons.emoji_events,
                   text: 'Championship',
@@ -47,7 +45,12 @@ class SidenavDrawer extends StatelessWidget {
               createDrawerItem(
                   icon: Icons.info, text: 'Info & Contact', context: context),
               createDrawerItem(
-                  icon: Icons.logout, text: 'Logout', context: context),
+                  icon: Icons.power_settings_new,
+                  text: 'Logout',
+                  context: context,
+                  onTap: () {
+                    myLogoutDialog();
+                  }),
             ],
           ),
         ),
@@ -55,11 +58,13 @@ class SidenavDrawer extends StatelessWidget {
     );
   }
 
-  Widget createDrawerItem(
-      {IconData? icon,
-      required String text,
-      String? badge,
-      required BuildContext context}) {
+  Widget createDrawerItem({
+    IconData? icon,
+    required String text,
+    String? badge,
+    required BuildContext context,
+    VoidCallback? onTap,
+  }) {
     return ListTile(
       leading: Icon(
         icon,
@@ -82,11 +87,10 @@ class SidenavDrawer extends StatelessWidget {
               ),
             )
           : null,
-      onTap: () {
-        Navigator.pop(context);
-        // Navigate to the corresponding screen (e.g., for 'My bookings'):
-        // Navigator.pushNamed(context, '/myBookings');
-      },
+      onTap: onTap ??
+          () {
+            Navigator.pop(context);
+          },
     );
   }
 }

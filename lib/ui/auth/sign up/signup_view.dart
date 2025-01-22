@@ -2,12 +2,13 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:smash_x_app/dialogs/custom_datepicker_dialog.dart';
-import 'package:smash_x_app/ui/auth/sign%20up/signup_controller.dart';
-import 'package:smash_x_app/ui/auth/sign%20up/widgets/custom_button.dart';
-import 'package:smash_x_app/ui/auth/sign%20up/widgets/custom_signup_textfield.dart';
-import 'package:smash_x_app/ui/auth/sign%20up/widgets/customsgnup_widget.dart';
-import 'package:smash_x_app/dialogs/gender_dialog.dart';
+import 'package:smash_x_app/ui/auth/login/login_view.dart';
+
+import '../../../dialogs/custom_datepicker_dialog.dart';
+import '../../../dialogs/gender_dialog.dart';
+import 'signup_controller.dart';
+import 'widgets/custom_signup_textfield.dart';
+import 'widgets/customsgnup_widget.dart';
 
 class SignupView extends StatelessWidget {
   const SignupView({super.key});
@@ -36,11 +37,11 @@ class SignupView extends StatelessWidget {
                 children: [
                   CustomSignupTextfield(
                     label: 'First Name',
-                    controller: TextEditingController(),
+                    controller: controller.nameController,
                   ),
                   CustomSignupTextfield(
                     label: 'Surname',
-                    controller: TextEditingController(),
+                    controller: controller.surnameController,
                   ),
                   GestureDetector(
                     onTap: () async {
@@ -66,8 +67,10 @@ class SignupView extends StatelessWidget {
                     child: Obx(
                       () => SignupTextfield(
                         label: 'Gender',
-                        controller:  TextEditingController(
-                          text: controller.selectedGender.value,
+                        controller: TextEditingController(
+                          text: controller.selectedGender.value.isEmpty
+                              ? 'Select Gender'
+                              : controller.selectedGender.value,
                         ),
                         menuIcon: Icons.menu,
                         enabled: false,
@@ -76,7 +79,7 @@ class SignupView extends StatelessWidget {
                   ),
                   SignupTextfield(
                     label: 'Mobile Phone',
-                    controller:  TextEditingController(),
+                    controller: controller.phoneController,
                     onButtonPressed: () {
                       showCountryPicker(
                         context: context,
@@ -91,8 +94,6 @@ class SignupView extends StatelessWidget {
                           ),
                         ),
                         onSelect: (Country value) {
-                          print(value.countryCode.toString());
-                          print(value.phoneCode.toString());
                           controller.countryCode = value.countryCode;
                           controller.phoneCode = value.phoneCode;
                         },
@@ -101,15 +102,15 @@ class SignupView extends StatelessWidget {
                   ),
                   CustomSignupTextfield(
                     label: 'Email',
-                    controller: TextEditingController(),
+                    controller: controller.emailController,
                   ),
                   CustomSignupTextfield(
                     label: 'Password',
-                    controller: TextEditingController(),
+                    controller: controller.passController,
                   ),
                   CustomSignupTextfield(
                     label: 'Repeat Password',
-                    controller: TextEditingController(),
+                    controller: controller.repeatPassController,
                   ),
                   const SizedBox(height: 15),
                 ],
@@ -120,10 +121,19 @@ class SignupView extends StatelessWidget {
               bottom: 0,
               child: FloatingActionButton(
                 onPressed: () {
-                  // Perform your submission logic here
+                  final error = controller.fieldValidation();
+                  if (error != null) {
+                    controller.showMessage(
+                        'Validation Error', error, Colors.red);
+                  } else {
+                    controller.showMessage(
+                        'Success', 'Successfully Registered!', Colors.green);
+                    ///// Navigate to LoginView
+                    Get.to(() => const LoginView());
+                  }
                 },
                 backgroundColor: Colors.black,
-                child:  const Icon(
+                child: const Icon(
                   Icons.done,
                   color: Colors.white,
                 ),

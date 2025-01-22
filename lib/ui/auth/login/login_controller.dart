@@ -14,18 +14,27 @@ class LoginController extends GetxController {
   ///// Validation for email and password
   fieldValidation() {
     String? error;
-    if (emailController.text.isEmpty && passController.text.isEmpty) {
-      error = 'All fields are required.';
-    } else if (emailController.text.isEmpty) {
+    if (emailController.text.isEmpty) {
       error = 'Email is required.';
     } else if (passController.text.isEmpty) {
       error = 'Password is required.';
     }
     return error;
   }
-  var isVisible = true.obs; // Observable to track visibility
 
-  // Function to toggle the visibility
+///// Validation massage
+  void showMessage(String title, String message, Color backgroundColor) {
+    Get.snackbar(
+      title,
+      message,
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: backgroundColor,
+      colorText: Colors.white,
+    );
+  }
+
+  var isVisible = true.obs;
+
   void toggleVisibility() {
     isVisible.value = !isVisible.value;
   }

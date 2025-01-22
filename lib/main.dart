@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:smash_x_app/ui/auth/login/login_view.dart';
 import 'package:smash_x_app/ui/auth/splashe/splash_view.dart';
 

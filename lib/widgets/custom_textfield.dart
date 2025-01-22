@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final Icon prefixIcon;
+  final TextEditingController? controller;
   final FocusNode? focusNode;
   final VoidCallback? onSubmit;
   final bool autofocus;
 
-  const CustomTextField(
-      {Key? key,
-      required this.hintText,
-      required this.prefixIcon,
-      this.focusNode,
-      this.onSubmit,
-      this.autofocus = false,
-      })
-      : super(key: key);
+  const CustomTextField({
+    Key? key,
+    required this.hintText,
+    required this.prefixIcon,
+    this.controller,
+    this.focusNode,
+    this.onSubmit,
+    this.autofocus = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       focusNode: focusNode,
       autofocus: autofocus,
+      controller: controller,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         hintText: hintText,

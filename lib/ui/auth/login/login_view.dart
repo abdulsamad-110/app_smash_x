@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:smash_x_app/dialogs/recover_dialog.dart';
 import 'package:smash_x_app/ui/home/home_view.dart';
 import 'package:smash_x_app/ui/auth/login/login_controller.dart';
@@ -32,51 +31,45 @@ class LoginView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ///// Logo
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/logo.png',
-                    color: Colors.white,
-                    height: 130,
-                  ),
-                ],
+              ///// Logo Section
+              Center(
+                child: Image.asset(
+                  'assets/slogo.png',
+                  height: 155,
+                ),
               ),
               const SizedBox(height: 40),
-              ///// Custom Email Field
+
+              ///// Email Field
               CustomTextField(
                 hintText: 'Email',
-                //autofocus: true,
+                controller: controller.emailController,
                 prefixIcon: Icon(Icons.person_2_outlined, color: Colors.white),
-                //focusNode: controller.emailFocusNode,
-                onSubmit: () {
-                  // FocusScope.of(context)
-                  //     .requestFocus(controller.passwordFocusNode);
-                },
-              ),
-              const SizedBox(height: 20),
-              ///// Custom Password Field
-              CustomTextField(
-                hintText: "Password",
-                prefixIcon: const Icon(Icons.lock_outline, color: Colors.white),
-                // focusNode: controller.passwordFocusNode,
                 onSubmit: () {},
               ),
               const SizedBox(height: 20),
 
+              ///// Password Field
+              CustomTextField(
+                hintText: "Password",
+                controller: controller.passController,
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.white),
+                onSubmit: () {},
+              ),
+              const SizedBox(height: 26),
+
+              ///// Remember Password and Recover Password Section
               Padding(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            controller.toggleVisibility();
-                          },
+                          onTap: controller.toggleVisibility,
                           child: Obx(() {
                             return Icon(
                               Icons.done,
@@ -87,38 +80,52 @@ class LoginView extends StatelessWidget {
                             );
                           }),
                         ),
-                        SizedBox(
-                          width: 4,
-                        ),
+                        const SizedBox(width: 4),
                         Text(
                           "Remember password",
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12),
                         ),
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {
-                        myRecoverDialog();
-                      },
+                      onTap: myRecoverDialog,
                       child: Text(
                         "Recover password",
-                        style: TextStyle(color: Colors.white),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              ///// Custom Login Button
+              const SizedBox(height: 26),
+
+              ///// Login Button
               CustomButton(
                 text: "LOGIN",
                 onPressed: () {
-                  Get.to(() => HomeView());
-                  print("Login button pressed");
+                  final error = controller.fieldValidation();
+                  if (error != null) {
+                    controller.showMessage(
+                      'Validation Error',
+                      error,
+                      Colors.red,
+                    );
+                  } else {
+                    controller.showMessage(
+                      'Welcome',
+                      '',
+                      Colors.green,
+                    );
+                    Get.to(() => HomeView());
+                    print("Login button pressed");
+                  }
                 },
               ),
               const SizedBox(height: 20),
-              ///// Custom Sign Up Button
+
+              ///// Sign-Up Button
               CustomButton(
                 text: "SIGN UP",
                 onPressed: () {
