@@ -5,8 +5,8 @@ import 'package:smash_x_app/widgets/custom_filtertext.dart';
 
 import '../ui/activities/activities_controller.dart';
 
-void myFilterDialog() {
-  final activitesController = Get.find<ActivitiesController>();
+void myFilterDialog({required bool isFirstField}) {
+  final  controller = Get.find<ActivitiesController>();
 
   Get.dialog(
     Dialog(
@@ -30,21 +30,36 @@ void myFilterDialog() {
               GestureDetector(
                   onTap: () {
                     print('Filter one tapped!');
-                    activitesController.updateFilter('Filter one text');
+                   if (isFirstField) {
+                    controller.updateSelectedText1('Filter first text.');
+                   }else {
+                    controller.updateSelectedText2('Filter first text.');
+                   }
+                   Get.back();
                   },
-                  child: const CustomFilterText(text: 'Filter one text')),
+                  child: const CustomFilterText(text: 'Filter first text')),
               GestureDetector(
                   onTap: () {
-                    print('Filter two tapped!');
-                    activitesController.updateFilter('Filter two text');
+                    print('Filter second tapped!');
+                    if (isFirstField) {
+                      controller.updateSelectedText1('Filter second text.');
+                    }else {
+                      controller.updateSelectedText2('Filter second text.');
+                    }
+                    Get.back();
                   },
-                  child: const CustomFilterText(text: 'Filter two text')),
+                  child: const CustomFilterText(text: 'Filter second text')),
               GestureDetector(
                   onTap: () {
                     print('Filter three tapped!');
-                    activitesController.updateFilter('Filter three text');
+                    if (isFirstField) {
+                      controller.updateSelectedText1('Filter third text.');
+                    }else {
+                      controller.updateSelectedText2('Filter third text.');
+                    }
+                    Get.back();
                   },
-                  child: const CustomFilterText(text: 'Filter three text')),
+                  child: const CustomFilterText(text: 'Filter third text')),
             ],
           ),
         ),

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smash_x_app/dialogs/myFilterDialog.dart';
+import 'package:smash_x_app/dialogs/myfilterdialog.dart';
 import 'package:smash_x_app/ui/activities/activities_controller.dart';
 import 'package:smash_x_app/widgets/customrow_widget.dart';
 
 void myDialog() {
-  final activitesController = Get.find<ActivitiesController>();
-
-  // Initialize with "All" if no filter is selected
-  if (activitesController.selectedFilter.value.isEmpty) {
-    activitesController.selectedFilter.value = "All";
-  }
+  final controller = Get.find<ActivitiesController>();
 
   Get.dialog(
     Dialog(
@@ -34,26 +29,30 @@ void myDialog() {
             GestureDetector(
               onTap: () {
                 print('Textfield one tapped');
-                myFilterDialog();
+                myFilterDialog(isFirstField: true);
               },
-              child: CustomRowWidget(
-                icon: Icons.sports,
-                text: activitesController.selectedFilter.value.isEmpty
-                    ? "All"
-                    : activitesController.selectedFilter.value,
+              child: Obx(
+                () => CustomRowWidget(
+                  icon: Icons.sports,
+                  text: controller.selectedText1.value.isEmpty
+                      ? "All"
+                      : controller.selectedText1.value,
+                ),
               ),
             ),
             const SizedBox(height: 16),
             GestureDetector(
               onTap: () {
                 print('Textfield two tapped');
-                myFilterDialog();
+                myFilterDialog(isFirstField: false);
               },
-              child: CustomRowWidget(
-                icon: Icons.location_on,
-                text: activitesController.selectedFilter.value.isEmpty
-                    ? "All"
-                    : activitesController.selectedFilter.value,
+              child: Obx(
+                () => CustomRowWidget(
+                  icon: Icons.location_on,
+                  text: controller.selectedText2.value.isEmpty
+                      ? "All"
+                      : controller.selectedText2.value,
+                ),
               ),
             ),
             Align(
